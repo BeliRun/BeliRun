@@ -17,4 +17,7 @@ public class Conductor {
 
     @ColumnInfo(name="telefono")
     public String telefono;
+
+    @ColumnInfo(name="isDelete")
+    public boolean isDelete;
 }

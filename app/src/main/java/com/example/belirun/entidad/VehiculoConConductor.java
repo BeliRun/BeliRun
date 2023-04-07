@@ -6,7 +6,7 @@ import androidx.room.Relation;
 
 import java.util.List;
 
-public class VehiculoConConductores {
+public class VehiculoConConductor {
     @Embedded public Vehiculo vehiculo;
     @Relation(
             parentColumn = "vehiculoId",

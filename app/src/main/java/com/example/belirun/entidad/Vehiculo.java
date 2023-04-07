@@ -17,4 +17,7 @@ public class Vehiculo{
 
     @ColumnInfo(name="marca")
     public String marca;
+
+    @ColumnInfo(name="isDelete")
+    public boolean isDelete;
 }
