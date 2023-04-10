@@ -1,146 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú lateral responsive - MagtimusPro</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú lateral responsive - MagtimusPro</title>
 
-    <link rel="stylesheet" href="css/estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
+
 <body id="body" class="container">
-    
-    <header>
-        <div class="icon__menu">
-            <i class="fas fa-bars" id="btn_open"></i>
+
+  <header>
+    <div class="icon__menu">
+      <i class="fas fa-bars" id="btn_open"></i>
+    </div>
+  </header>
+
+  <div class="menu__side" id="menu_side">
+
+    <div class="name__page">
+      <i class="fas fa-bus"></i>
+      <h4>BeliRun</h4>
+    </div>
+
+    <div class="options__menu">
+
+      <a href="#" class="selected">
+        <div class="option">
+          <i class="fas fa-home" title="Inicio"></i>
+          <h4>Inicio</h4>
         </div>
-    </header>
+      </a>
 
-    <div class="menu__side" id="menu_side">
-
-        <div class="name__page">
-            <i class="fas fa-bus"></i>
-            <h4>BeliRun</h4>
+      <a href="#">
+        <div class="option">
+          <i class="fas fa-money-bill" title="Producido"></i>
+          <h4>Producido</h4>
         </div>
+      </a>
 
-        <div class="options__menu">	
-
-            <a href="#" class="selected">
-                <div class="option">
-                    <i class="fas fa-home" title="Inicio"></i>
-                    <h4>Inicio</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-money-bill" title="Producido"></i>
-                    <h4>Producido</h4>
-                </div>
-            </a>
-            
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-wrench" title="Mantenimiento"></i>
-                    <h4>Mantenimiento</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-boxes" title="Rodamiento"></i>
-                    <h4>Rodamiento</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-car" title="Vehiculos"></i>
-                    <h4>Vehiculos</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-user" title="Conductores"></i>
-                    <h4>Conductores</h4>
-                </div>
-            </a>
-
+      <a href="#">
+        <div class="option">
+          <i class="fas fa-wrench" title="Mantenimiento"></i>
+          <h4>Mantenimiento</h4>
         </div>
+      </a>
+
+      <a href="#">
+        <div class="option">
+          <i class="fas fa-boxes" title="Rodamiento"></i>
+          <h4>Rodamiento</h4>
+        </div>
+      </a>
+
+      <a href="#">
+        <div class="option">
+          <i class="fas fa-car" title="Vehiculos"></i>
+          <h4>Vehiculos</h4>
+        </div>
+      </a>
+
+      <a href="#">
+        <div class="option">
+          <i class="fas fa-user" title="Conductores"></i>
+          <h4>Conductores</h4>
+        </div>
+      </a>
 
     </div>
 
-    <main>
-      <div class="mt-4">
-        <h1>CRUD de Conductores</h1>
+  </div>
+
+  <main>
+    <div class="mt-4">
+      <h1><b>Conductores</b>
         <!-- Botón para agregar un nuevo conductor -->
-        <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar conductor</button>
-        <!-- Tabla para mostrar la lista de conductores -->
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>DNI</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tablaConductores">
-            <!-- Los datos de los conductores se agregan dinámicamente aquí utilizando JavaScript -->
-            <td>Carlos </td>
-            <td>Rodríguez</td>
-            <td>3456789012</td>
-            <td>
-              <button class="btn btn-primary btn-sm data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
-              <button class="btn btn-danger btn-sm">Eliminar</button>
-            </td>
-          </tbody>
-        </table>
-      </div>
-    
-      <!-- Modal para agregar un nuevo conductor -->
-      <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="agregarModalLabel">Agregar conductor</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#agregarModal"><i
+            class="fas fa-plus"></i></button>
+      </h1>
+      <form>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
+            aria-describedby="button-addon2">
+          <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+        </div>
+
+      </form>
+      <!-- Tabla para mostrar la lista de conductores -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaConductores">
+          <!-- Los datos de los conductores se agregan dinámicamente aquí utilizando JavaScript -->
+          <td>Carlos </td>
+          <td>Rodríguez</td>
+          <td>3456789012</td>
+          <td>
+            <button class="btn btn-primary btn-sm data-bs-toggle=" modal" data-bs-target="#editarModal"><i
+                class="fas fa-edit"></i></button>
+            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+          </td>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal para agregar un nuevo conductor -->
+    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agregarModalLabel">Agregar conductor</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombre" placeholder=" ">
+              <label for="nombre">Nombre</label>
             </div>
-            <div class="modal-body">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nombre" placeholder=" ">
-                <label for="nombre">Nombre</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="apellido" placeholder=" ">
-                <label for="apellido">Apellido</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="dni" placeholder=" ">
-                <label for="dni">DNI</label>
-              </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="apellido" placeholder=" ">
+              <label for="apellido">Apellido</label>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" onclick="agregarConductor()">Guardar</button>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="dni" placeholder=" ">
+              <label for="dni">DNI</label>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="agregarConductor()">Guardar</button>
           </div>
         </div>
       </div>
-    
-      <!-- Modal para editar un conductor -->
-      <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editarModalLabel">Editar conductor</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria
-    </main>
+    </div>
 
-    <script src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- Modal para editar un conductor -->
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editarModalLabel">Editar conductor</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria </main>
+
+              <script src="js/script.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+                crossorigin="anonymous"></script>
 </body>
+
 </html>
