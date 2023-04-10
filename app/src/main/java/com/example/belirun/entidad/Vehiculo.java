@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Vehiculo{
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "vehiculoId")
     public int vehiculoId;
 
     @ColumnInfo(name = "numero")
