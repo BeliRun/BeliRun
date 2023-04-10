@@ -1,16 +1,22 @@
 package com.example.belirun;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.room.Room;
 /* importacion de carpertas */
-import com.exmaple.belirun.entidad;
-import com.exmaple.belirun.dao;
+import com.example.belirun.entidad.Vehiculo;
+import com.example.belirun.entidad.Conductor;
+import com.example.belirun.dao.VehiculoDao;
+import com.example.belirun.dao.ConductorDao;
+import com.example.belirun.dao.MantenimientoDao;
+import com.example.belirun.dao.ProducidoDao;
+import com.example.belirun.dao.RodamientoDao;
 import com.example.belirun.bd.BeliRunDatabase;
-
 
 public class Principal extends Activity {
     private BeliRunDatabase db;
@@ -23,7 +29,7 @@ public class Principal extends Activity {
                 .build();
         WebView webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/main.html");
+        webView.loadUrl("file:///android_asset/index.html");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -49,14 +55,14 @@ public class Principal extends Activity {
             this.vehiculoDao = db.vehiculoDao();
             this.conductorDao = db.conductorDao();
             this.mantenimientoDao = db.mantenimientoDao();
-            this.producidoDao = producidoDao();
-            this rodamientoDao = rodamientoDao();
+            this.producidoDao = db.producidoDao();
+            this.rodamientoDao = db.rodamientoDao();
         }
 
         /* Acciones de Vehiculo */
 
-        @JavaScriptInterface
-        public void AgregarVehiculo(String placa, String marca, int numero){
+        @JavascriptInterface
+        public void AgregarVehiculo(String placa, String marca, String numero){
             Vehiculo buseta = new Vehiculo();
             buseta.placa = placa;
             buseta.marca = marca;
@@ -65,42 +71,42 @@ public class Principal extends Activity {
             vehiculoDao.insertAll(buseta);
         }
         
-        @JavaScriptInterface
-        public void EditarVehiculo(String placa, String marca, int numero){
-            Vehiculo vehiculoExistente = VehiculoDao.search(placa);
+        @JavascriptInterface
+        public void EditarVehiculo(String placa, String marca, String numero){
+            Vehiculo vehiculoExistente = vehiculoDao.search(placa);
             if (vehiculoExistente != null) {
                 vehiculoExistente.marca = marca;
                 vehiculoExistente.numero = numero;
-                VehiculoDao.updateAll(vehiculoExistente);
+                vehiculoDao.updateAll(vehiculoExistente);
             } else {
                 // El vehículo no fue encontrado en la base de datos
             }
         }
     
-        @JavaScriptInterface
+        @JavascriptInterface
         public void BuscarVehiculoId(String placa){
             vehiculoDao.searchId(placa);
         }
         
-        @JavaScriptInterface
+        @JavascriptInterface
         public List<Vehiculo> MostrarVehiculo(){
-            return vehiculoDao.getAll();
+            return vehiculoDao.getAllVehiculos();
         }
         
-        @JavaScriptInterface
+        @JavascriptInterface
         public void EliminarVehiculo(String placa){
-            int id = vehiculoDao.BuscarVehiculoId(placa);
+            int id = vehiculoDao.searchId(placa);
             vehiculoDao.delete(id);
         }
     
-        @JavaScriptInterface
+        @JavascriptInterface
         public Vehiculo BuscarVehiculo(String placa){
             return vehiculoDao.search(placa);
         }
         
         /* Acciones del conductor */
 
-        @JavaScriptInterface
+        @JavascriptInterface
         public void AgregarConductor(String nombres, String apellidos, String telefono){
             Conductor persona = new Conductor();
             persona.nombres = nombres;
@@ -110,9 +116,9 @@ public class Principal extends Activity {
             conductorDao.insertAll(persona);
         }
         
-        @JavaScriptInterface
+        @JavascriptInterface
         public void EditarConductor(String nombres, String apellidos, String telefono){
-            Vehiculo conductorExistente = conductorDao.search(telefono);
+            Conductor conductorExistente = conductorDao.search(telefono);
             if (conductorExistente != null) {
                 conductorExistente.nombres = nombres;
                 conductorExistente.apellidos = apellidos;
@@ -122,24 +128,24 @@ public class Principal extends Activity {
             }
         }
     
-        @JavaScriptInterface
+        @JavascriptInterface
         public void BuscarConductorId(String telefono){
             conductorDao.searchId(telefono);
         }
         
-        @JavaScriptInterface
+        @JavascriptInterface
         public List<Conductor> MostrarConductor(){
             return conductorDao.getAll();
         }
         
-        @JavaScriptInterface
+        @JavascriptInterface
         public void EliminarConductor(String telefono){
-            int id = conductorDao.BuscarConductorId(telefono);
+            int id = conductorDao.searchId(telefono);
             conductorDao.delete(id);
         }
     
-        @JavaScriptInterface
-        public Vehiculo BuscarConductor(String telefono){
+        @JavascriptInterface
+        public Conductor BuscarConductor(String telefono){
             return conductorDao.search(telefono);
         }
     }
