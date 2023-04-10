@@ -20,6 +20,12 @@ public interface VehiculoDao {
     @Query("UPDATE Vehiculo SET isDelete=1 WHERE vehiculoId=:id")
     void delete(int id);
 
-    @Query("SELECT * FROM Vehiculo")
+    @Query("SELECT vehiculoId FROM Vehiculo WHERE placa=:placa")
+    int searchId(String placa);
+
+    @Query("SELECT * FROM Vehiculo WHERE placa=:placa AND isDelete=0")
+    Vehiculo search(String placa);
+
+    @Query("SELECT * FROM Vehiculo WHERE isDelete=0")
     List<Vehiculo> getAllVehiculos();
 }

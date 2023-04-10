@@ -20,6 +20,12 @@ public interface ConductorDao {
     @Query("UPDATE Conductor SET isDelete=1 WHERE conductorId=:id")
     void delete(int id);
 
-    @Query("SELECT * FROM  Conductor    ")
+    @Query("SELECT conductorId FROM Conductor WHERE telefono=:telefono")
+    int searchId(String telefono);
+
+    @Query("SELECT * FROM Conductor WHERE telefono=:telefono AND isDelete=0")
+    Conductor search(String telefono);
+
+    @Query("SELECT * FROM  Conductor WHERE isDelete=0 ")
     List<Conductor> getAll();
 }
