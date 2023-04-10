@@ -17,7 +17,7 @@ import com.example.belirun.entidad.Vehiculo;
 import com.example.belirun.entidad.VehiculoConductorReferenciaCruzada;
 
 @Database(entities = {Conductor.class, Vehiculo.class, Mantenimiento.class, Producido.class, Rodamiento.class, VehiculoConductorReferenciaCruzada.class}, version = 1)
-abstract class MyAppDatabase extends RoomDatabase {
+public abstract class BeliRunDatabase extends RoomDatabase {
     public abstract VehiculoDao vehiculoDao();
     public abstract ConductorDao conductorDao();
     public abstract MantenimientoDao mantenimientoDao();

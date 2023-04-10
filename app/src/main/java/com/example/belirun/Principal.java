@@ -5,11 +5,20 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.room.Room;
+
+import com.example.belirun.bd.BeliRunDatabase;
+
+
 public class Principal extends Activity {
+    private BeliRunDatabase db;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        db = Room.databaseBuilder(getApplicationContext(),
+                        BeliRunDatabase.class, "belirun-db")
+                .build();
         WebView webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("file:///android_asset/main.html");
