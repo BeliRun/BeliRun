@@ -81,7 +81,6 @@
       <!-- Botón para agregar un nuevo automóvil -->
       <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#agregarModal"><i
           class="fas fa-plus"></i></button>
-
     </h1>
     <form>
       <div class="input-group mb-3">
@@ -107,7 +106,7 @@
         <td>92</td>
         <td>Mercedes</td>
         <td>
-          <button class="btn btn-primary btn-sm data-bs-toggle=" modal" data-bs-target="#editarModal"><i
+          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal"><i
               class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
         </td>
@@ -120,12 +119,44 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="agregarModalLabel">Agregar automóvil</h5>
+            <h5 class="modal-title" id="agregarModalLabel">Agregar Vehiculo</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="placa" placeholder=" ">
+              <input type="text" class="form-control" id="placa" oninput="this.value = this.value.toUpperCase();" placeholder=" ">
+              <label for="placa">Placa</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="numeroInterno" placeholder=" ">
+              <label for="numeroInterno">Número interno</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="marca" oninput="this.value = this.value.toUpperCase();" placeholder=" ">
+              <label for="marca">Marca</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
+              Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="agregarAutomovil()"><i class="fas fa-save"></i>
+              Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para editar un automóvil -->
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editarModalLabel">Editar Vehiculo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="placa" placeholder=" " disabled>
               <label for="placa">Placa</label>
             </div>
             <div class="form-floating mb-3">
@@ -138,19 +169,14 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="agregarAutomovil()">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
+              Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="agregarAutomovil()"><i class="fas fa-save"></i>
+              Guardar</button>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Modal para editar un automóvil -->
-    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editarModalLabel">Editar automóvil</h5>
   </main>
 
   <script src="js/script.js"></script>
