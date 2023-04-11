@@ -12,7 +12,7 @@
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
   <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
-  
+
 </head>
 
 <body id="body" class="container">
@@ -25,32 +25,32 @@
   <div class='menu__side' id='menu_side'></div>
   <main>
     <h1>Estadísticas de coutas de rutas de busetas</h1>
-		<table class="table">
-			<thead>
-				<tr>
-					<th># Ruta</th>
-					<th>Couta promedio</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>#1</td>
-					<td>$ 2.500</td>
-				</tr>
-				<tr>
-					<td>#2</td>
-					<td>$ 3.200</td>
-				</tr>
-				<tr>
-					<td>#3</td>
-					<td>$ 2.800</td>
-				</tr>
-				<tr>
-					<td>#4</td>
-					<td>$ 2.600</td>
-				</tr>
-			</tbody>
-		</table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th># Ruta</th>
+          <th>Couta promedio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1</td>
+          <td>$ 2.500</td>
+        </tr>
+        <tr>
+          <td>#2</td>
+          <td>$ 3.200</td>
+        </tr>
+        <tr>
+          <td>#3</td>
+          <td>$ 2.800</td>
+        </tr>
+        <tr>
+          <td>#4</td>
+          <td>$ 2.600</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
   <canvas id="grafico"></canvas>
 
@@ -75,7 +75,7 @@
         y: {
           beginAtZero: true,
           ticks: {
-            callback: function(value, index, values) {
+            callback: function (value, index, values) {
               return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
           }
