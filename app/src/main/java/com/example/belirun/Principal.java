@@ -103,8 +103,8 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void BuscarVehiculoId(String placa){
-            vehiculoDao.searchId(placa);
+        public void BuscarVehiculoPlaca(String placa){
+
         }
 
         @JavascriptInterface
@@ -114,6 +114,7 @@ public class Principal extends Activity {
                 public void run() {
                     List<Vehiculo> vehiculos = vehiculoDao.getAllVehiculos();
                     String vehiculosJson = new Gson().toJson(vehiculos);
+                    Log.d("DATOS PARA VER: ", vehiculosJson);
                     webView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -127,15 +128,47 @@ public class Principal extends Activity {
 
         @JavascriptInterface
         public void EliminarVehiculo(String placa){
-            int id = vehiculoDao.searchId(placa);
-            vehiculoDao.delete(id);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int id = vehiculoDao.searchId(placa);
+                    vehiculoDao.delete(id);
+                    webView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.evaluateJavascript("Android.MostrarVehiculo()", null);
+                        }
+                    });
+                }
+            }).start();
         }
+
 
         @JavascriptInterface
-        public Vehiculo BuscarVehiculo(String placa){
-            return vehiculoDao.search(placa);
+        public void BuscarVehiculo(String placa){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Vehiculo vehiculo = vehiculoDao.search(placa);
+                    if(vehiculo!=null){
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String vehiculoJson = new Gson().toJson(vehiculo);
+                                webView.evaluateJavascript("mostrarVehiculo(["+vehiculoJson+",])", null);
+                            }
+                        });
+                    }else{
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.evaluateJavascript("mostrarVehiculo(null)", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
-
         /* Acciones del conductor */
 
         @JavascriptInterface
