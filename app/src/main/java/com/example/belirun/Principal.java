@@ -10,6 +10,15 @@ import android.webkit.WebViewClient;
 import androidx.room.Room;
 
 import com.example.belirun.bd.BeliRunDatabase;
+import com.example.belirun.dao.ConductorDao;
+import com.example.belirun.dao.MantenimientoDao;
+import com.example.belirun.dao.ProducidoDao;
+import com.example.belirun.dao.RodamientoDao;
+import com.example.belirun.dao.VehiculoDao;
+import com.example.belirun.entidad.Conductor;
+import com.example.belirun.entidad.Vehiculo;
+
+import java.util.List;
 /* importacion de carpertas */
 
 
@@ -24,7 +33,7 @@ public class Principal extends Activity {
                 .build();
         WebView webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/Catalogo.html");
+        webView.loadUrl("file:///android_asset/index.html");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -35,7 +44,7 @@ public class Principal extends Activity {
         });
 
     }
-/*
+
     public class JavaScriptInterface {
 
         private Context context;
@@ -45,7 +54,7 @@ public class Principal extends Activity {
         public ProducidoDao producidoDao;
         public RodamientoDao rodamientoDao;
         
-        public JavaScriptInterface(Context context){ /* Constructor *//*
+        public JavaScriptInterface(Context context){ /* Constructor */
             this.context = context;
             this.vehiculoDao = db.vehiculoDao();
             this.conductorDao = db.conductorDao();
@@ -55,7 +64,7 @@ public class Principal extends Activity {
         }
 
         /* Acciones de Vehiculo */
-/*
+
         @JavascriptInterface
         public void AgregarVehiculo(String placa, String marca, String numero){
             Vehiculo buseta = new Vehiculo();
@@ -100,7 +109,7 @@ public class Principal extends Activity {
         }
         
         /* Acciones del conductor */
-/*
+
         @JavascriptInterface
         public void AgregarConductor(String nombres, String apellidos, String telefono){
             Conductor persona = new Conductor();
@@ -144,5 +153,4 @@ public class Principal extends Activity {
             return conductorDao.search(telefono);
         }
     }
-    */
 }
