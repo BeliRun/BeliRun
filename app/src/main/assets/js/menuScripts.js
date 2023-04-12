@@ -83,5 +83,3 @@ menuOptions[2].addEventListener('click', ()=> window.location.href = "file:///an
 menuOptions[3].addEventListener('click', ()=> window.location.href = "file:///android_asset/Rodamiento.html");
 menuOptions[4].addEventListener('click', ()=> window.location.href = "file:///android_asset/Vehiculos.html");
 menuOptions[5].addEventListener('click', ()=> window.location.href = "file:///android_asset/Conductores.html");
-
-

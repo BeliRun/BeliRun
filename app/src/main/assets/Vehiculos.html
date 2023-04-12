@@ -94,7 +94,7 @@
     </div>
 
     <!-- Modal para editar un automóvil -->
-    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true" onshow="cargarDatos()">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -103,29 +103,28 @@
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="placa" placeholder=" " disabled>
+              <input type="text" class="form-control" id="placaEditar" placeholder=" " disabled>
               <label for="placa">Placa</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="numeroInterno" placeholder=" ">
+              <input type="text" class="form-control" id="numeroInternoEditar" placeholder=" ">
               <label for="numeroInterno">Número interno</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="marca" placeholder=" ">
+              <input type="text" class="form-control" id="marcaEditar" placeholder=" ">
               <label for="marca">Marca</label>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
               Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="agregarAutomovil()"><i class="fas fa-save"></i>
+            <button type="button" class="btn btn-primary" onclick="actualizarVehiculo()"><i class="fas fa-save"></i>
               Guardar</button>
           </div>
         </div>
       </div>
     </div>
   </main>
-
   <script src="js/script.js"></script>
   <script src="js/menuScripts.js"></script>
   <script src="js/scriptVehiculo.js"></script>

@@ -72,6 +72,7 @@ public class Principal extends Activity {
         @JavascriptInterface
         public void showToast(String message) {
             Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show();
+            Log.d("MIRAMEEEEE!!!!!", "ENTRO AL TOAST");
         }
         @JavascriptInterface
         public void AgregarVehiculo(String placa, String marca, String numero){
@@ -127,18 +128,39 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
+        public void ObtenerDatos(String placa){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Vehiculo vehiculo = vehiculoDao.search(placa);
+                    if(vehiculo!=null){
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String vehiculoJson = new Gson().toJson(vehiculo);
+                                webView.evaluateJavascript("mostrarDatos("+vehiculoJson+")", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
+        }
+
+        @JavascriptInterface
         public void EliminarVehiculo(String placa){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     int id = vehiculoDao.searchId(placa);
-                    vehiculoDao.delete(id);
-                    webView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            webView.evaluateJavascript("Android.MostrarVehiculo()", null);
-                        }
-                    });
+                    if (id>0){
+                        vehiculoDao.delete(id);
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.evaluateJavascript("Android.MostrarVehiculo()", null);
+                            }
+                        });
+                    }
                 }
             }).start();
         }
