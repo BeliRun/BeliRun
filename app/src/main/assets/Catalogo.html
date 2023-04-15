@@ -25,54 +25,47 @@
 
   <main>
     <h1>Catálogo de Vehiculos</h1>
-    <div class="row">
-      <div class="col-md-4 mt-4">
-        <div style="border: none;" class="card box">
-          <div class="card-header">
-            <center>
-              <h5 class="card-title"> SVA123 #92</h5>
-            </center>
-          </div>
-          <div class="card-body">
-            <center>
-              <img style="width: 250px; height: 250px;" src="img/bus.png">
-            </center>
-          </div>
-        </div>
+    <div class="row" id="tablaAutomovilesC">
+     
+    </div>
+  </main>
+
+  <!-- Modal de Opciones -->
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="menuModalLabel">Elige una opción:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <div class="col-md-4 mt-4">
-        <div style="border: none;" class="card box">
-          <div class="card-header">
-            <center>
-              <h5 class="card-title"> SVA123 #92</h5>
-            </center>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <a href="#" class="menu-option" id="Mantenimiento">
+              <i class="fas fa-wrench fa-3x"></i>
+              <p>Mantenimiento</p>
+            </a>
           </div>
-          <div class="card-body">
-            <center>
-              <img style="width: 250px; height: 250px;" src="img/bus.png">
-            </center>
+          <div class="col-sm-4">
+            <a href="#" class="menu-option" id="Producido">
+              <i class="fas fa-industry fa-3x"></i>
+              <p>Producido</p>
+            </a>
           </div>
-        </div>
-      </div>
-      <div class="col-md-4 mt-4">
-        <div style="border: none;" class="card box">
-          <div class="card-header">
-            <center>
-              <h5 class="card-title"> SVA123 #92</h5>
-            </center>
-          </div>
-          <div class="card-body">
-            <center>
-              <img style="width: 250px; height: 250px;" src="img/bus.png">
-            </center>
+          <div class="col-sm-4">
+            <a href="#" class="menu-option" id="Rodamiento">
+              <i class="fas fa-circle-notch fa-3x"></i>
+              <p>Rodamiento</p>
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </main>
-
+  </div>
+</div>
   <script src="js/script.js"></script>
   <script src="js/menuScripts.js"></script>
+  <script src="js/scriptCatalogo.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>

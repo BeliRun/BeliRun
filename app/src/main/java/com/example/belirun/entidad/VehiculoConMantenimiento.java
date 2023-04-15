@@ -12,4 +12,5 @@ public class VehiculoConMantenimiento {
             entityColumn = "vehiculoId"
     )
     public List<Mantenimiento> mantenimientos;
+    
 }

@@ -27,5 +27,5 @@ public interface ConductorDao {
     Conductor search(String telefono);
 
     @Query("SELECT * FROM  Conductor WHERE isDelete=0 ")
-    List<Conductor> getAll();
+    List<Conductor> getAllConductor();
 }

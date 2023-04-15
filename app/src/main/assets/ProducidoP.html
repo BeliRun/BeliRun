@@ -22,9 +22,8 @@
   </header>
 
   <div class='menu__side' id='menu_side'></div>
-
   <main>
-    <h1><b>Mantenimiento </b>
+    <h1><b>Producido </b>
       <!-- Botón para agregar una nueva producción -->
       <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#agregarModal"><i
           class="fas fa-plus"></i></button>
@@ -43,8 +42,8 @@
         <tr>
           <th>Fecha</th>
           <th>Día</th>
-          <th>Descripcion</th>
-          <th>Valor</th>
+          <th># Ruta</th>
+          <th>Cuota</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -52,7 +51,7 @@
         <!-- Los datos de las producciones se agregan dinámicamente aquí utilizando JavaScript -->
         <td>04/01/2001</td>
         <td>lunes</td>
-        <td>cambio de llantas</td>
+        <td>45</td>
         <td>170000</td>
         <td>
           <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal"><i
@@ -68,7 +67,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="agregarModalLabel">Agregar Mantenimiento</h5>
+            <h5 class="modal-title" id="agregarModalLabel">Agregar Producido</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
@@ -91,11 +90,11 @@
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="ruta" placeholder=" ">
-              <label for="ruta">Descripcion</label>
+              <label for="ruta"># Ruta</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="cuota" placeholder=" ">
-              <label for="cuota">Valor</label>
+              <label for="cuota">Cuota</label>
             </div>
           </div>
           <div class="modal-footer">
@@ -112,7 +111,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editarModalLabel">Editar Mantenimiento</h5>
+            <h5 class="modal-title" id="editarModalLabel">Editar Producido</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
@@ -135,11 +134,11 @@
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="ruta" placeholder=" ">
-              <label for="ruta">Descripcion</label>
+              <label for="ruta"># Ruta</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="cuota" placeholder=" ">
-              <label for="cuota">Valor</label>
+              <label for="cuota">Cuota</label>
             </div>
           </div>
           <div class="modal-footer">

@@ -10,8 +10,7 @@ public class VehiculoConConductor {
     @Embedded public Vehiculo vehiculo;
     @Relation(
             parentColumn = "vehiculoId",
-            entityColumn = "conductorId",
-            associateBy = @Junction(VehiculoConductorReferenciaCruzada.class)
+            entityColumn = "conductorId"
     )
     public List<Conductor> conductores;
 }

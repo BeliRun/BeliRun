@@ -195,12 +195,19 @@ public class Principal extends Activity {
 
         @JavascriptInterface
         public void AgregarConductor(String nombres, String apellidos, String telefono){
-            Conductor persona = new Conductor();
-            persona.nombres = nombres;
-            persona.apellidos = apellidos;
-            persona.telefono = telefono;
-            persona.isDelete = false;
-            conductorDao.insertAll(persona);
+             new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            Conductor persona = new Conductor();
+                            persona.nombres = nombres;
+                            persona.apellidos = apellidos;
+                            persona.telefono = telefono;
+                            persona.isDelete = false;
+                            conductorDao.insertAll(persona);
+                        }
+                    }
+            ).start();
         }
 
         @JavascriptInterface
@@ -221,19 +228,87 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public List<Conductor> MostrarConductor(){
-            return conductorDao.getAll();
+        public void MostrarConductor(){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<Conductor> conductor = ConductorDao.getAllConductor();
+                    String conductorJson = new Gson().toJson(conductor);
+                    Log.d("DATOS PARA VER: ", conductorJson);
+                    webView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.evaluateJavascript("mostrarConductor(" + conductorJson + ")", null);
+                        }
+                    });
+                }
+
+                }).start();
         }
 
         @JavascriptInterface
+        public void ObtenerDatos(String telefono){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Conductor conductor = ConductorDao.search(telefono);
+                    if(vehiculo!=null){
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String conductorJson = new Gson().toJson(conductor);
+                                webView.evaluateJavascript("mostrarDatos("+conductorJson+")", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
+        }
+
+
+        @JavascriptInterface
         public void EliminarConductor(String telefono){
-            int id = conductorDao.searchId(telefono);
-            conductorDao.delete(id);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int id = conductorDao.searchId(telefono);
+                    if (id>0){
+                        conductorDao.delete(id);
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.evaluateJavascript("Android.MostrarConductor()", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
 
         @JavascriptInterface
         public Conductor BuscarConductor(String telefono){
-            return conductorDao.search(telefono);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Conductor conductor = conductorDao.search(telefono);
+                    if(conductor!=null){
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String conductorJson = new Gson().toJson(conductor);
+                                webView.evaluateJavascript("mostrarConductor(["+conductorJson+",])", null);
+                            }
+                        });
+                    }else{
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.evaluateJavascript("mostrarConductor(null)", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
     }
 }

@@ -8,7 +8,6 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.example.belirun.entidad.VehiculoConConductor;
-import com.example.belirun.entidad.VehiculoConductorReferenciaCruzada;
 
 import java.util.List;
 
@@ -27,7 +26,5 @@ public interface VehiculoConConductorDao {
     @Query("SELECT * FROM Conductor WHERE conductorId = :conductorId")
     VehiculoConConductor getConductorConVehiculosById(int conductorId);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertVehiculoConConductor(VehiculoConductorReferenciaCruzada vehiculoConductorReferenciaCruzada);
 }
 

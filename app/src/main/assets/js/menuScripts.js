@@ -48,6 +48,13 @@ const menuHTML = `
     </div>
   </a>
 
+  <a href='#' id='menuOpt7'>
+  <div class='option'>
+    <i class="fas fa-chart-bar" title='Estadisticas'></i>
+    <h4>Estadisticas</h4>
+  </div>
+</a>
+
 </div>
 `;
 document.getElementById("menu_side").innerHTML = menuHTML;
@@ -56,12 +63,13 @@ let partes = ruta.split("/");
 let nombreArchivo = partes[partes.length - 1];
 
 let optionesFiles = [
-    "index.html",
+    "Catalogo.html",
     "Producido.html",
     "Mantenimiento.html",
     "Rodamiento.html",
     "Vehiculos.html",
-    "Conductores.html"
+    "Conductores.html",
+    "index.html"
 ];
 
 let optionSeleted = optionesFiles.indexOf(nombreArchivo);
@@ -73,13 +81,15 @@ let menuOptions = [
     document.getElementById("menuOpt4"),
     document.getElementById("menuOpt5"),
     document.getElementById("menuOpt6"),
+    document.getElementById("menuOpt7"),
 ]
 
 menuOptions[optionSeleted].className = "selected";
 
-menuOptions[0].addEventListener('click', ()=> window.location.href = "file:///android_asset/index.html");
+menuOptions[0].addEventListener('click', ()=> window.location.href = "file:///android_asset/Catalogo.html");
 menuOptions[1].addEventListener('click', ()=> window.location.href = "file:///android_asset/Producido.html");
 menuOptions[2].addEventListener('click', ()=> window.location.href = "file:///android_asset/Mantenimiento.html");
 menuOptions[3].addEventListener('click', ()=> window.location.href = "file:///android_asset/Rodamiento.html");
 menuOptions[4].addEventListener('click', ()=> window.location.href = "file:///android_asset/Vehiculos.html");
 menuOptions[5].addEventListener('click', ()=> window.location.href = "file:///android_asset/Conductores.html");
+menuOptions[6].addEventListener('click', ()=> window.location.href = "file:///android_asset/index.html");

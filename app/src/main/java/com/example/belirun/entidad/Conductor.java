@@ -20,4 +20,7 @@ public class Conductor {
 
     @ColumnInfo(name="isDelete")
     public boolean isDelete;
+
+    @ColumnInfo(name="vehiculoId")
+    public int vehiculoId;
 }
