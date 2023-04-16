@@ -23,4 +23,5 @@ public abstract class BeliRunDatabase extends RoomDatabase {
     public abstract MantenimientoDao mantenimientoDao();
     public abstract ProducidoDao producidoDao();
     public abstract RodamientoDao rodamientoDao();
+    public abstract VehiculoConConductorDao vehiculoConConductorDao();
 }

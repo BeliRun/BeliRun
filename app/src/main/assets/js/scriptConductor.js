@@ -2,8 +2,9 @@ function agregarConductor() {
   let nombres = document.getElementById("nombre").value;
   let apellidos = document.getElementById("apellido").value;
   let telefono = document.getElementById("telefono").value;
+  let vehiculo = document.getElementById("numeroSeleccionado").value;
 
-  Android.AgregarConductor(nombres, apellidos, telefono);
+  Android.AgregarConductor(nombres, apellidos, telefono, parseInt(vehiculo));
   window.location.href = "file:///android_asset/Conductores.html";
 }
 
@@ -16,25 +17,26 @@ function actualizarConductor() {
   let modal = {
     "nombres": document.getElementById("nombreEditar").value,
     "apellidos": document.getElementById("apellidoEditar").value,
-    "telefono": document.getElementById("telefonoEditar").value
+    "telefono": document.getElementById("telefonoEditar").value,
+    "vehiculo": document.getElementById("numeroSeleccionadoEditar").value,
   };
-  Android.EditarConductor(modal.nombres, modal.apellidos, modal.telefono);
+  Android.EditarConductor(modal.nombres, modal.apellidos, modal.telefono, parseInt(modal.vehiculo));
   window.location.href = "file:///android_asset/Conductores.html";
 }
 
-function mostrarDatos(conductor) {
+function mostrarDatos(datos) {
   let modal = {
     "nombres": document.getElementById("nombreEditar"),
     "apellidos": document.getElementById("apellidoEditar"),
     "telefono": document.getElementById("telefonoEditar"),
-    "vehiculo": document.getElementById("numero"),
+    "vehiculo": document.getElementById("numeroSeleccionadoEditar"),
   };
 
   // Asigna los valores correspondientes a los campos del formulario
-  modal.nombres.value = conductor.nombres;
-  modal.apellidos.value = conductor.apellidos;
-  modal.telefono.value = conductor.telefono;
-  modal.vehiculo.value = conductor.vehiculoId;
+  modal.nombres.value = datos.conductores[0].nombres;
+  modal.apellidos.value = datos.conductores[0].apellidos;
+  modal.telefono.value = datos.conductores[0].telefono;
+  modal.vehiculo.value = datos.vehiculo.vehiculoId;
 }
 
 function eliminarConductor(telefono) {
@@ -45,37 +47,43 @@ function eliminarConductor(telefono) {
   };
 }
 
-function mostrarBusetica(Conductores) {
-  let selectVehiculos = document.querySelector('#numeroEditar select');
+
+function mostrarBusetica(vehiculos, esEditar) {
+  let selectVehiculos;
+  if (esEditar) {
+    selectVehiculos = document.getElementById("numeroSeleccionadoEditar");
+  } else {
+    selectVehiculos = document.getElementById("numeroSeleccionado");
+  }
   selectVehiculos.innerHTML = '';
   let opciones = '';
-  if (Conductores) {
-    Conductores.forEach(conductor => {
-      opciones += `<option value="${conductor.vehiculoId}">${conductor.vehiculoId}</option>`;
+  if (vehiculos!=null) {
+    vehiculos.forEach(vehiculo => {
+      opciones += `<option value="${vehiculo.vehiculoId}">${vehiculo.numero}</option>`;
     });
     selectVehiculos.innerHTML = opciones;
-  }
+  }else{
+    Android.showToast("tamos mal")
+  } 
 }
 
-
-
-function mostrarConductor(Conductores) {
+function mostrarConductor(datos) {
   let tablaConductores = document.getElementById("tablaConductores");
   tablaConductores.innerHTML = "";
   let raw = "";
-  if (Conductores) {
-    Conductores.forEach(Conductor => {
+  if (datos) {
+    datos.forEach(dato => {
       raw = `
           <tr>
-            <td>${Conductor.nombres}</td>
-            <td>${Conductor.apellidos}</td>
-            <td>${Conductor.telefono}</td>
-            <td>${Conductor.vehiculoId}</td>
+            <td>${dato.conductores[0].nombres}</td>
+            <td>${dato.conductores[0].apellidos}</td>
+            <td>${dato.conductores[0].telefono}</td>
+            <td>${dato.vehiculo.placa}</td>
             <td>
-              <button id="${Conductor.telefono}" onclick="Android.ObtenerDatosConductor(this.id);" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">
-                <i class="fas fa-edit"></i>
+              <button id="${dato.conductores[0].telefono}" onclick="Android.ObtenerVehiculo(true); Android.ObtenerDatosConductor(this.id);" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">
+              <i class="fas fa-edit"></i>
               </button>
-              <button id="${Conductor.telefono}" onclick="eliminarConductor(this.id)" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminarModal">
+              <button id="${dato.conductores[0].telefono}" onclick="eliminarConductor(this.id)" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminarModal">
                 <i class="fas fa-trash"></i>
               </button>
             </td>

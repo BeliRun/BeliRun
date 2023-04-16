@@ -17,6 +17,7 @@ import com.example.belirun.dao.ConductorDao;
 import com.example.belirun.dao.MantenimientoDao;
 import com.example.belirun.dao.ProducidoDao;
 import com.example.belirun.dao.RodamientoDao;
+import com.example.belirun.dao.VehiculoConConductorDao;
 import com.example.belirun.dao.VehiculoDao;
 import com.example.belirun.entidad.Conductor;
 import com.example.belirun.entidad.Vehiculo;
@@ -59,6 +60,7 @@ public class Principal extends Activity {
         public MantenimientoDao mantenimientoDao;
         public ProducidoDao producidoDao;
         public RodamientoDao rodamientoDao;
+        public VehiculoConConductorDao vehiculoConConductorDao;
         public JavaScriptInterface(Context context){ /* Constructor */
             this.context = context;
             this.vehiculoDao = db.vehiculoDao();
@@ -66,6 +68,7 @@ public class Principal extends Activity {
             this.mantenimientoDao = db.mantenimientoDao();
             this.producidoDao = db.producidoDao();
             this.rodamientoDao = db.rodamientoDao();
+            this.vehiculoConConductorDao = db.vehiculoConConductorDao();
         }
 
         /* Acciones de Vehiculo */
@@ -140,23 +143,23 @@ public class Principal extends Activity {
                 }
             }).start();
         }
-
+        
         @JavascriptInterface
-        public void ObtenerVehiculo(String placa){
+        public void ObtenerVehiculo(boolean esEditar){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Vehiculo vehiculo = vehiculoDao.search(placa);
-                    if(vehiculo!=null){
-                        webView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                String vehiculoJson = new Gson().toJson(vehiculo);
-                                webView.evaluateJavascript("mostrarBusetica("+vehiculoJson+")", null);
-                            }
-                        });
-                    }
+                    List<Vehiculo> vehiculos = vehiculoDao.getAllVehiculos();
+                    String vehiculosJson = new Gson().toJson(vehiculos);
+                    Log.d("VEHICULOS REGISTRADOS: ", vehiculosJson);
+                    webView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.evaluateJavascript("mostrarBusetica(" + vehiculosJson + ", " + esEditar + ")", null);
+                        }
+                    });
                 }
+
             }).start();
         }
 
@@ -208,7 +211,7 @@ public class Principal extends Activity {
         /* Acciones del conductor */
 
         @JavascriptInterface
-        public void AgregarConductor(String nombres, String apellidos, String telefono, String vehiculo){
+        public void AgregarConductor(String nombres, String apellidos, String telefono, int vehiculo){
              new Thread(
                     new Runnable() {
                         @Override
@@ -226,8 +229,9 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void EditarConductor(String nombres, String apellidos, String telefono, String vehiculo){
+        public void EditarConductor(String nombres, String apellidos, String telefono, int vehiculo){
             Conductor conductorExistente = conductorDao.search(telefono);
+            Log.d("DATOS PARA EDITAR: ", new Gson().toJson(conductorExistente));
             if (conductorExistente != null) {
                 conductorExistente.telefono = telefono;
                 conductorExistente.vehiculoId = vehiculo;
@@ -242,13 +246,12 @@ public class Principal extends Activity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Conductor> conductor = conductorDao.getAllConductor();
-                    String conductorJson = new Gson().toJson(conductor);
-                    Log.d("DATOS PARA VER: ", conductorJson);
+                    String datos = new Gson().toJson(vehiculoConConductorDao.getVehiculosConConductor());
+                    Log.d("DATOS PARA VER: ", datos);
                     webView.post(new Runnable() {
                         @Override
                         public void run() {
-                            webView.evaluateJavascript("mostrarConductor(" + conductorJson + ")", null);
+                            webView.evaluateJavascript("mostrarConductor("+datos+")", null);
                         }
                     });
                 }
@@ -261,13 +264,14 @@ public class Principal extends Activity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Conductor conductor = conductorDao.search(telefono);
-                    if(conductor!=null){
+                    Log.d("Telefono que llega: ", telefono);
+                    String datos = new Gson().toJson(vehiculoConConductorDao.getVehiculoConConductorById(telefono));
+                    Log.d("Datos Del Conductor", datos);
+                    if(datos!=null){
                         webView.post(new Runnable() {
                             @Override
                             public void run() {
-                                String conductorJson = new Gson().toJson(conductor);
-                                webView.evaluateJavascript("mostrarDatos("+conductorJson+")", null);
+                                webView.evaluateJavascript("mostrarDatos("+datos+")", null);
                             }
                         });
                     }

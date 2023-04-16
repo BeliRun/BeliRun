@@ -26,6 +26,9 @@ public interface VehiculoDao {
     @Query("SELECT * FROM Vehiculo WHERE placa=:placa AND isDelete=0")
     Vehiculo search(String placa);
 
+    @Query("SELECT * FROM Vehiculo WHERE vehiculoId=:vehiculo AND isDelete=0")
+    Vehiculo searchVehiculo(int vehiculo);
+
     @Query("SELECT * FROM Vehiculo WHERE isDelete=0")
     List<Vehiculo> getAllVehiculos();
 }

@@ -25,8 +25,8 @@
     <div class="mt-4">
       <h1><b>Conductores</b>
         <!-- Botón para agregar un nuevo conductor -->
-        <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#agregarModal"><i
-            class="fas fa-plus"></i></button>
+        <button type="button" class="btn btn-success mb-2" onclick="Android.ObtenerVehiculo(false)"
+          data-bs-toggle="modal" data-bs-target="#agregarModal"><i class="fas fa-plus"></i></button>
       </h1>
       <form>
         <div class="input-group mb-3">
@@ -49,14 +49,6 @@
         </thead>
         <tbody id="tablaConductores">
           <!-- Los datos de los conductores se agregan dinámicamente aquí utilizando JavaScript -->
-          <td>Carlos </td>
-          <td>Rodríguez</td>
-          <td>3456789012</td>
-          <td>
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal"><i
-                class="fas fa-edit"></i></button>
-            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-          </td>
         </tbody>
       </table>
     </div>
@@ -84,17 +76,17 @@
               <input type="text" class="form-control" id="telefono" placeholder=" ">
               <label for="telefono">Telefono</label>
             </div>
-            <div class="form-floating mb-3" id="numero">
-              <select class="form-select">
+            <div class="form-floating mb-3"id="numero">
+              <select class="form-select" id="numeroSeleccionado" > 
               </select>
               <label for="placas"># Vehiculo</label>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
-              Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="agregarConductor()"><i class="fas fa-save"></i>
-              Guardar</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
+                Cancelar</button>
+              <button type="button" class="btn btn-primary" onclick="agregarConductor()"><i class="fas fa-save"></i>
+                Guardar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -112,7 +104,7 @@
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="nombreEditar" oninput="this.value = this.value.toUpperCase();"
                 placeholder=" " disabled>
-              <label for="nombreEditar" >Nombre</label>
+              <label for="nombreEditar">Nombre</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="apellidoEditar"
@@ -124,21 +116,19 @@
               <label for="telefonoEditar">Telefono</label>
             </div>
             <div class="form-floating mb-3" id="numeroEditar">
-              <select class="form-select">
+              <select class="form-select" id="numeroSeleccionadoEditar" >
               </select>
               <label for="placas"># Vehiculo</label>
             </div>
           </div>
-          
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
-              Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="actualizarConductor()"><i class="fas fa-save"></i>
-              Guardar</button>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
+            Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="actualizarConductor()"><i class="fas fa-save"></i>
+            Guardar</button>
         </div>
       </div>
+    </div>
     </div>
     <!-- Modal de confirmación de eliminación -->
     <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
