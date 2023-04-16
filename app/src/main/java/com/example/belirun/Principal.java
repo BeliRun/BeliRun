@@ -104,11 +104,6 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void BuscarVehiculoPlaca(String placa){
-
-        }
-
-        @JavascriptInterface
         public void MostrarVehiculo() {
             new Thread(new Runnable() {
                 @Override
@@ -124,7 +119,7 @@ public class Principal extends Activity {
                     });
                 }
 
-                }).start();
+            }).start();
         }
 
         @JavascriptInterface
@@ -139,6 +134,25 @@ public class Principal extends Activity {
                             public void run() {
                                 String vehiculoJson = new Gson().toJson(vehiculo);
                                 webView.evaluateJavascript("mostrarDatos("+vehiculoJson+")", null);
+                            }
+                        });
+                    }
+                }
+            }).start();
+        }
+
+        @JavascriptInterface
+        public void ObtenerVehiculo(String placa){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Vehiculo vehiculo = vehiculoDao.search(placa);
+                    if(vehiculo!=null){
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                String vehiculoJson = new Gson().toJson(vehiculo);
+                                webView.evaluateJavascript("mostrarBusetica("+vehiculoJson+")", null);
                             }
                         });
                     }
@@ -194,7 +208,7 @@ public class Principal extends Activity {
         /* Acciones del conductor */
 
         @JavascriptInterface
-        public void AgregarConductor(String nombres, String apellidos, String telefono){
+        public void AgregarConductor(String nombres, String apellidos, String telefono, String vehiculo){
              new Thread(
                     new Runnable() {
                         @Override
@@ -203,6 +217,7 @@ public class Principal extends Activity {
                             persona.nombres = nombres;
                             persona.apellidos = apellidos;
                             persona.telefono = telefono;
+                            persona.vehiculoId = vehiculo;
                             persona.isDelete = false;
                             conductorDao.insertAll(persona);
                         }
@@ -211,11 +226,11 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void EditarConductor(String nombres, String apellidos, String telefono){
+        public void EditarConductor(String nombres, String apellidos, String telefono, String vehiculo){
             Conductor conductorExistente = conductorDao.search(telefono);
             if (conductorExistente != null) {
-                conductorExistente.nombres = nombres;
-                conductorExistente.apellidos = apellidos;
+                conductorExistente.telefono = telefono;
+                conductorExistente.vehiculoId = vehiculo;
                 conductorDao.updateAll(conductorExistente);
             } else {
                 // El vehículo no fue encontrado en la base de datos
@@ -223,16 +238,11 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void BuscarConductorId(String telefono){
-            conductorDao.searchId(telefono);
-        }
-
-        @JavascriptInterface
         public void MostrarConductor(){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Conductor> conductor = ConductorDao.getAllConductor();
+                    List<Conductor> conductor = conductorDao.getAllConductor();
                     String conductorJson = new Gson().toJson(conductor);
                     Log.d("DATOS PARA VER: ", conductorJson);
                     webView.post(new Runnable() {
@@ -247,12 +257,12 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public void ObtenerDatos(String telefono){
+        public void ObtenerDatosConductor(String telefono){
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Conductor conductor = ConductorDao.search(telefono);
-                    if(vehiculo!=null){
+                    Conductor conductor = conductorDao.search(telefono);
+                    if(conductor!=null){
                         webView.post(new Runnable() {
                             @Override
                             public void run() {
@@ -286,7 +296,7 @@ public class Principal extends Activity {
         }
 
         @JavascriptInterface
-        public Conductor BuscarConductor(String telefono){
+        public void BuscarConductor(String telefono){
             new Thread(new Runnable() {
                 @Override
                 public void run() {

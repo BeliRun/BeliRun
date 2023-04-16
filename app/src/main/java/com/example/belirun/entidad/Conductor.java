@@ -22,5 +22,5 @@ public class Conductor {
     public boolean isDelete;
 
     @ColumnInfo(name="vehiculoId")
-    public int vehiculoId;
+    public String vehiculoId;
 }

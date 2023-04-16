@@ -43,6 +43,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Telefono</th>
+            <th>Buseta</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -83,6 +84,11 @@
               <input type="text" class="form-control" id="telefono" placeholder=" ">
               <label for="telefono">Telefono</label>
             </div>
+            <div class="form-floating mb-3" id="numero">
+              <select class="form-select">
+              </select>
+              <label for="placas"># Vehiculo</label>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
@@ -105,23 +111,30 @@
           <div class="modal-body">
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="nombreEditar" oninput="this.value = this.value.toUpperCase();"
-                placeholder=" ">
-              <label for="nombreEditar">Nombre</label>
+                placeholder=" " disabled>
+              <label for="nombreEditar" >Nombre</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="apellidoEditar"
-                oninput="this.value = this.value.toUpperCase();" placeholder=" ">
+                oninput="this.value = this.value.toUpperCase();" placeholder=" " disabled>
               <label for="apellidoEditar">Apellido</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="telefonoEditar" placeholder=" ">
               <label for="telefonoEditar">Telefono</label>
             </div>
+            <div class="form-floating mb-3" id="numeroEditar">
+              <select class="form-select">
+              </select>
+              <label for="placas"># Vehiculo</label>
+            </div>
+          </div>
+          
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i>
               Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="actualizarVehiculo()"><i class="fas fa-save"></i>
+            <button type="button" class="btn btn-primary" onclick="actualizarConductor()"><i class="fas fa-save"></i>
               Guardar</button>
           </div>
         </div>
